@@ -24,7 +24,9 @@ public class GameControllerTest  {
     private MockMvc mockMvc;
     
     private static final String GAME_CONTENT_HOME_TEAM_MISSING = " {\"awayTeam\": \"WBA\"} ";
+    private static final String GAME_CONTENT_AWAY_TEAM_MISSING = " {\"homeTeam\": \"Stockport County\"} ";
     private static final String GAME_CONTENT_ARSENAL_VS_WBA = " {\"homeTeam\": \"Arsenal\", \"awayTeam\": \"WBA\"} ";
+ 
 
     @Before
     public void setup() {
@@ -42,10 +44,18 @@ public class GameControllerTest  {
     }
     
     @Test
-    public void thatGameControllerReturns400IfIncorrectInformation() throws Exception {
+    public void thatGameControllerReturns400IfNoHomeTeamSupplied() throws Exception {
         mockMvc.perform(post("/game/play")
                         .content(GAME_CONTENT_HOME_TEAM_MISSING)
                         .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().is4xxClientError());
+                        .andExpect(status().isBadRequest());
+    }
+    
+    @Test
+    public void thatGameControllerReturns400IfNoAwayTeamSupplied() throws Exception {
+        mockMvc.perform(post("/game/play")
+                        .content(GAME_CONTENT_AWAY_TEAM_MISSING)
+                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isBadRequest());
     }
 }
