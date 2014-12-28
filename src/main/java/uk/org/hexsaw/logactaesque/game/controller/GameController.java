@@ -13,12 +13,16 @@ import uk.org.hexsaw.logactaesque.game.exception.InvalidGameException;
 import uk.org.hexsaw.logactaesque.game.model.Game;
 import uk.org.hexsaw.logactaesque.game.model.GameResult;
 import uk.org.hexsaw.logactaesque.game.model.validation.GameValidator;
+import uk.org.hexsaw.logactaesque.game.service.Rollable;
 
 @RestController
 public class GameController {
     
-	@Autowired
+	@Autowired(required=true)
 	private GameValidator gameValidator;
+	
+	@Autowired(required=true)
+	private Rollable sevenSidedDice;
 	
     @RequestMapping(value="/game/play", method = RequestMethod.POST)
     @ResponseBody
@@ -27,17 +31,16 @@ public class GameController {
 		ValidationUtils.invokeValidator(gameValidator, game, result);	
 		if (result.hasErrors()) {
 			throw new InvalidGameException();
-		}
-		
-		return new GameResult(game.getHomeTeam(), 0, game.getAwayTeam(), 3);		
+		}	
+		return new GameResult(game.getHomeTeam(), sevenSidedDice.roll(), game.getAwayTeam(), sevenSidedDice.roll());		
 	}
-
     
     public void setGameValidator(GameValidator gameValidator) {
         this.gameValidator = gameValidator;
     }
+   
+    public void setSevenSidedDice(Rollable sevenSidedDice) {
+        this.sevenSidedDice = sevenSidedDice;
+    }
     
-    
-	
-
 }
