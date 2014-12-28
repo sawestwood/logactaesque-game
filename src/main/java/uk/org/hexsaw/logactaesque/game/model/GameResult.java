@@ -1,5 +1,7 @@
 package uk.org.hexsaw.logactaesque.game.model;
 
+import java.text.MessageFormat;
+
 public class GameResult {
 
     private String homeTeam;
@@ -44,6 +46,10 @@ public class GameResult {
 
     public void setAwayGoals(int awayGoals) {
         this.awayGoals = awayGoals;
+    }
+    
+    public String toString() {
+        return "GameResult [" + homeTeam + " " + Integer.toString(homeGoals)  + "-"  + Integer.toString(awayGoals) + " " + awayTeam + "]";
     }
 
 }

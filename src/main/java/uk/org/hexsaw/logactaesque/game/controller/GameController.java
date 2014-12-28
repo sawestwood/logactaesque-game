@@ -1,5 +1,7 @@
 package uk.org.hexsaw.logactaesque.game.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -18,6 +20,8 @@ import uk.org.hexsaw.logactaesque.game.service.Rollable;
 @RestController
 public class GameController {
     
+    private static final Logger  logger = LoggerFactory.getLogger(GameController.class);
+    
 	@Autowired(required=true)
 	private GameValidator gameValidator;
 	
@@ -27,12 +31,15 @@ public class GameController {
     @RequestMapping(value="/game/play", method = RequestMethod.POST)
     @ResponseBody
 	public GameResult play(@RequestBody Game game) {      	
-    	BeanPropertyBindingResult result = new BeanPropertyBindingResult(game, game.toString());
-		ValidationUtils.invokeValidator(gameValidator, game, result);	
-		if (result.hasErrors()) {
+    	BeanPropertyBindingResult validationResult = new BeanPropertyBindingResult(game, game.toString());
+		ValidationUtils.invokeValidator(gameValidator, game, validationResult);	
+		if (validationResult.hasErrors()) {
+		    logger.error(validationResult.toString());
 			throw new InvalidGameException();
 		}	
-		return new GameResult(game.getHomeTeam(), sevenSidedDice.roll(), game.getAwayTeam(), sevenSidedDice.roll());		
+		GameResult gameResult = new GameResult(game.getHomeTeam(), sevenSidedDice.roll(), game.getAwayTeam(), sevenSidedDice.roll());	
+		logger.info(gameResult.toString());
+		return gameResult;
 	}
     
     public void setGameValidator(GameValidator gameValidator) {

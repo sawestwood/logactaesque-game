@@ -29,7 +29,7 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game [homeTeam=" + homeTeam + " vs. awayTeam=" + awayTeam + "]";
+        return "Game [" + homeTeam + " vs " + awayTeam + "]";
     }
 	
 	
