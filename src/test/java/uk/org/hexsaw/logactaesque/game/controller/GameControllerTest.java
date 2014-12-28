@@ -15,10 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import uk.org.hexsaw.logactaesque.game.Application;
+import uk.org.hexsaw.logactaesque.game.model.validation.GameValidator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = Application.class )
 public class GameControllerTest  {
 
     private MockMvc mockMvc;
@@ -30,7 +31,10 @@ public class GameControllerTest  {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(new GameController()).build();
+        GameController gameController = new GameController();
+        gameController.setGameValidator(new GameValidator());
+        this.mockMvc = MockMvcBuilders.standaloneSetup(gameController).build();
+        
     }
 
     @Test

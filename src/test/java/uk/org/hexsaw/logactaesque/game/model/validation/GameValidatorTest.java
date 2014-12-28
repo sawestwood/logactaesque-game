@@ -12,6 +12,7 @@ import org.springframework.validation.Validator;
 
 import uk.org.hexsaw.logactaesque.game.model.Game;
 
+
 public class GameValidatorTest {
 
 	private Validator validator;

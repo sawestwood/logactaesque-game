@@ -1,5 +1,6 @@
 package uk.org.hexsaw.logactaesque.game.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,14 +16,13 @@ import uk.org.hexsaw.logactaesque.game.model.validation.GameValidator;
 
 @RestController
 public class GameController {
-	
+    
+	@Autowired
 	private GameValidator gameValidator;
 	
     @RequestMapping(value="/game/play", method = RequestMethod.POST)
     @ResponseBody
-	public GameResult play(@RequestBody Game game) {  
-    	
-    	gameValidator = new GameValidator();
+	public GameResult play(@RequestBody Game game) {      	
     	BeanPropertyBindingResult result = new BeanPropertyBindingResult(game, game.toString());
 		ValidationUtils.invokeValidator(gameValidator, game, result);	
 		if (result.hasErrors()) {
@@ -31,6 +31,13 @@ public class GameController {
 		
 		return new GameResult(game.getHomeTeam(), 0, game.getAwayTeam(), 3);		
 	}
+
+    
+    public void setGameValidator(GameValidator gameValidator) {
+        this.gameValidator = gameValidator;
+    }
+    
+    
 	
 
 }

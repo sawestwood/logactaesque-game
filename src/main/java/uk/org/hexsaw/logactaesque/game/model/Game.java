@@ -26,6 +26,13 @@ public class Game {
 	public void setAwayTeam(String awayTeam) {
 		this.awayTeam = awayTeam;
 	}
+
+    @Override
+    public String toString() {
+        return "Game [homeTeam=" + homeTeam + " vs. awayTeam=" + awayTeam + "]";
+    }
+	
+	
 	
 	
 
