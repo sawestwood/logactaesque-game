@@ -6,7 +6,7 @@ import java.util.Random;
 
 import uk.org.hexsaw.logactaesque.game.service.Rollable;
 
-public class SevenSidedDiceImpl implements Rollable {
+public class SevenSidedDice implements Rollable {
 
     private static List<Integer> FACES = Arrays.asList(new Integer[] {
         0, 1, 2, 3, 4, 5, 6

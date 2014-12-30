@@ -1,6 +1,5 @@
 package uk.org.hexsaw.logactaesque.game.model;
 
-import java.text.MessageFormat;
 
 public class GameResult {
 

@@ -4,12 +4,13 @@ public class Game {
 	
 	private String homeTeam;
 	private String awayTeam;
+	private long scheduled;
 	
-	public Game() {
-	    
+	public Game() {    
+	    this.scheduled = System.currentTimeMillis();
 	}
-	
-	public Game(String homeTeam, String awayTeam) {
+
+    public Game(String homeTeam, String awayTeam) {
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
 	}
@@ -17,15 +18,14 @@ public class Game {
 	public String getHomeTeam() {
 		return homeTeam;
 	}
-	public void setHomeTeam(String homeTeam) {
-		this.homeTeam = homeTeam;
-	}
+
 	public String getAwayTeam() {
 		return awayTeam;
 	}
-	public void setAwayTeam(String awayTeam) {
-		this.awayTeam = awayTeam;
-	}
+    
+    public long getScheduled() {
+        return scheduled;
+    }
 
     @Override
     public String toString() {

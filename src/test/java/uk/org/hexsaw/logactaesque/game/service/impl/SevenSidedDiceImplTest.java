@@ -10,7 +10,7 @@ import uk.org.hexsaw.logactaesque.game.service.Rollable;
 
 public class SevenSidedDiceImplTest {
     
-    private Rollable dice = new SevenSidedDiceImpl();
+    private Rollable dice = new SevenSidedDice();
 
     @Test
     public void onlyGeneratesNumberBetweenZeroAndSix() {

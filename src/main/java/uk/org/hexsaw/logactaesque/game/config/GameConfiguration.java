@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import uk.org.hexsaw.logactaesque.game.model.validation.GameValidator;
 import uk.org.hexsaw.logactaesque.game.service.Rollable;
-import uk.org.hexsaw.logactaesque.game.service.impl.SevenSidedDiceImpl;
+import uk.org.hexsaw.logactaesque.game.service.impl.SevenSidedDice;
 
 @Configuration
 @EnableAutoConfiguration
@@ -19,7 +19,7 @@ public class GameConfiguration {
     
     @Bean(name="sevenSidedDice")
     public Rollable sevenSidedDice() {
-        return new SevenSidedDiceImpl();
+        return new SevenSidedDice();
     }
 
 }
