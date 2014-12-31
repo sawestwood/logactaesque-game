@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/*.jar 
+web: java -Dserver.port=$PORT -jar target/logactaesque-game-0.0.1-SNAPSHOT.jar 
