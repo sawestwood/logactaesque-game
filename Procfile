@@ -1,1 +1,1 @@
-web: java -jar target/logactaesque-game-0.0.1-SNAPSHOT.jar 
+web: java  $JAVA_OPTS -jar target/logactaesque-game-0.0.1-SNAPSHOT.jar 
